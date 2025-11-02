@@ -1,34 +1,28 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
-class CleaningRecord extends Model
+class RoomAssignment extends Model
 {
     protected $fillable = [
         'user_id',
         'room_id',
-        'date',
-        'room_cleaned',
+        'assigned_date',
     ];
-    
+
     protected $casts = [
-        'date' => 'date',
-        'room_cleaned' => 'boolean',
+        'assigned_date' => 'date',
     ];
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-    
-    // UBAH DARI room() JADI ruangan()
+
     public function ruangan()
     {
         return $this->belongsTo(Ruangan::class, 'room_id');
-    }
-    
-    public function tasks()
-    {
-        return $this->hasMany(CleaningRecordTask::class);
     }
 }

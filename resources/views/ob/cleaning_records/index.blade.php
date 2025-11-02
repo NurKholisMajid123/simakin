@@ -4,14 +4,17 @@
 @section('page-title', 'Cek Kebersihan Ruangan')
 
 @section('content')
+@if($ruangans->isNotEmpty())
 <div class="row mb-4">
     <div class="col-12">
-        <div class="alert alert-info">
-            <i class="bi bi-info-circle me-2"></i>
-            <strong>Panduan:</strong> Klik pada card ruangan untuk melihat checklist. Centang setiap tugas yang sudah dikerjakan, lalu klik tombol "Simpan Checklist".
+        <div class="alert alert-success">
+            <i class="bi bi-check-circle me-2"></i>
+            <strong>Alokasi Hari Ini:</strong> Anda ditugaskan untuk {{ $ruangans->count() }} ruangan.
+            <br><small class="text-muted">Klik pada card ruangan untuk melihat checklist. Centang setiap tugas yang sudah dikerjakan, lalu klik tombol "Simpan Checklist".</small>
         </div>
     </div>
 </div>
+@endif
 
 <!-- Room Cards View -->
 <div id="room-cards-view">
@@ -129,8 +132,13 @@
     @if($ruangans->isEmpty())
     <div class="card mt-4">
         <div class="card-body text-center py-5">
-            <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
-            <p class="text-muted mt-3">Belum ada ruangan yang tersedia</p>
+            <i class="bi bi-calendar-x text-muted" style="font-size: 4rem;"></i>
+            <h5 class="text-muted mt-3">Tidak Ada Alokasi Ruangan</h5>
+            <p class="text-muted">Anda belum dialokasikan ruangan untuk hari ini. Silakan hubungi admin untuk mendapatkan alokasi ruangan.</p>
+            <div class="alert alert-info mt-3">
+                <i class="bi bi-info-circle me-2"></i>
+                <strong>Info:</strong> Hubungi administrator untuk mendapatkan alokasi ruangan kerja hari ini.
+            </div>
         </div>
     </div>
     @endif

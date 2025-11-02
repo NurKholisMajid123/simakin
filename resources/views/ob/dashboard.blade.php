@@ -4,6 +4,7 @@
 @section('page-title', 'Dashboard OB')
 
 @section('content')
+@if($hasAssignment)
 <div class="row">
     <!-- Welcome Card -->
     <div class="col-12 mb-4">
@@ -86,7 +87,31 @@
         </div>
     </div>
 </div>
+@else
+<!-- No Assignment Message -->
+<div class="row">
+    <div class="col-12">
+        <div class="card border-warning">
+            <div class="card-body text-center py-5">
+                <i class="bi bi-calendar-x text-warning" style="font-size: 4rem;"></i>
+                <h4 class="text-warning mt-3">Tidak Ada Alokasi Ruangan</h4>
+                <p class="text-muted mb-4">Anda belum dialokasikan ruangan kerja untuk hari ini.</p>
+                <div class="alert alert-info text-start">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Langkah yang perlu dilakukan:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Hubungi administrator untuk mendapatkan alokasi ruangan</li>
+                        <li>Pastikan admin sudah mengalokasikan ruangan untuk hari ini</li>
+                        <li>Refresh halaman ini setelah mendapatkan alokasi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 
+@if($hasAssignment)
 <!-- Progress Section -->
 <div class="row">
     <div class="col-md-6 mb-4">
@@ -195,6 +220,7 @@
         </div>
     </div>
 </div>
+@endif
 @endsection
 
 @push('styles')

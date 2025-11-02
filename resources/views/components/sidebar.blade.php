@@ -38,6 +38,14 @@
                 </a>
             </li>
 
+            <!-- Room Assignments -->
+            <li class="menu-item {{ request()->is('admin/room-assignments*') ? 'active' : '' }}">
+                <a href="{{ route('admin.room-assignments.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-check"></i>
+                    <div data-i18n="Room Assignments">Alokasi Ruangan</div>
+                </a>
+            </li>
+
             <!-- Cleaning Records -->
             <li class="menu-item {{ request()->is('admin/cleaning-records*') ? 'active' : '' }}">
                 <a href="{{ route('admin.cleaning-records.index') }}" class="menu-link">

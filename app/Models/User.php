@@ -43,4 +43,16 @@ class User extends Authenticatable
     {
         return $this->hasMany(CleaningRecord::class);
     }
+
+    public function roomAssignments()
+    {
+        return $this->hasMany(RoomAssignment::class);
+    }
+
+    public function assignedRooms($date = null)
+    {
+        $date = $date ?? now()->toDateString();
+        return $this->belongsToMany(Ruangan::class, 'room_assignments')
+            ->wherePivot('assigned_date', $date);
+    }
 }
