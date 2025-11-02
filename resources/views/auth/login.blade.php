@@ -45,6 +45,20 @@
       max-width: 80px;
       height: auto;
     }
+    
+    /* Make password toggle clickable */
+    .input-group-text.cursor-pointer {
+      cursor: pointer;
+      user-select: none;
+    }
+    
+    .input-group-text.cursor-pointer:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .input-group-text.cursor-pointer:active {
+      background-color: #e0e0e0;
+    }
   </style>
 </head>
 
@@ -124,8 +138,8 @@
                          placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                          aria-describedby="password"
                          required />
-                  <span class="input-group-text cursor-pointer">
-                    <i class="bx bx-hide"></i>
+                  <span class="input-group-text cursor-pointer" id="togglePassword">
+                    <i class="bx bx-hide" id="toggleIcon"></i>
                   </span>
                   @error('password')
                     <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -164,25 +178,37 @@
   <!-- Main JS -->
   <script src="{{ asset('sneat') }}/assets/js/main.js"></script>
 
-  <!-- Password Toggle -->
+  <!-- Password Toggle Script - FIXED -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const togglePassword = document.querySelector('.form-password-toggle .input-group-text');
-      const password = document.querySelector('#password');
-      const icon = togglePassword.querySelector('i');
+      const togglePassword = document.getElementById('togglePassword');
+      const passwordInput = document.getElementById('password');
+      const toggleIcon = document.getElementById('toggleIcon');
 
-      togglePassword.addEventListener('click', function() {
-        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-        password.setAttribute('type', type);
-        
-        if (type === 'password') {
-          icon.classList.remove('bx-show');
-          icon.classList.add('bx-hide');
-        } else {
-          icon.classList.remove('bx-hide');
-          icon.classList.add('bx-show');
-        }
-      });
+      if (togglePassword && passwordInput && toggleIcon) {
+        togglePassword.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          // Toggle password visibility
+          const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+          passwordInput.setAttribute('type', type);
+          
+          // Toggle icon
+          if (type === 'password') {
+            toggleIcon.classList.remove('bx-show');
+            toggleIcon.classList.add('bx-hide');
+          } else {
+            toggleIcon.classList.remove('bx-hide');
+            toggleIcon.classList.add('bx-show');
+          }
+        });
+
+        // Also work on icon click
+        toggleIcon.addEventListener('click', function(e) {
+          e.preventDefault();
+          togglePassword.click();
+        });
+      }
     });
   </script>
 </body>
